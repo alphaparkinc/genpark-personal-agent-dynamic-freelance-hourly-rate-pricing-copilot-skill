@@ -1,0 +1,80 @@
+{
+  "name": "genpark-personal-agent-dynamic-freelance-hourly-rate-pricing-copilot-skill",
+  "title": "Dynamic Freelance Hourly Rate & Project Scope Pricing Copilot Skill",
+  "version": "1.0.0",
+  "description": "Independent consultant and freelance project pricing engine, minimum effective hourly rate (MEHR) calculation, cost-plus & value-based pricing synthesizer, scope creep risk buffer estimator, and proposal contract generator. Built for GenPark (https://www.genpark.ai).",
+  "homepage": "https://www.genpark.ai",
+  "organization": {
+    "name": "GenPark Inc.",
+    "url": "https://www.genpark.ai",
+    "linkedin": "https://www.linkedin.com/company/92955550"
+  },
+  "mcp_version": "2024-11-05",
+  "category": "personal-agent",
+  "tools": [
+    {
+      "name": "calculate_minimum_effective_hourly_rate",
+      "description": "Calculate true baseline billable rate (MEHR) accounting for self-employment taxes, health insurance overhead, unbillable administrative hours, and profit margin.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "target_annual_take_home_usd": {
+            "type": "number"
+          },
+          "annual_business_expenses_usd": {
+            "type": "number"
+          },
+          "estimated_tax_bracket_pct": {
+            "type": "number",
+            "description": "e.g. 30.0 for 30%"
+          },
+          "billable_weeks_per_year": {
+            "type": "integer",
+            "description": "e.g. 48"
+          },
+          "target_billable_hours_per_week": {
+            "type": "integer",
+            "description": "e.g. 25"
+          }
+        },
+        "required": [
+          "target_annual_take_home_usd",
+          "annual_business_expenses_usd",
+          "estimated_tax_bracket_pct"
+        ]
+      }
+    },
+    {
+      "name": "price_fixed_scope_project",
+      "description": "Synthesize optimal fixed-fee project quote incorporating value-based premium and scope-creep risk contingency buffer.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "estimated_baseline_hours": {
+            "type": "number"
+          },
+          "base_hourly_rate_usd": {
+            "type": "number"
+          },
+          "client_economic_upside_usd": {
+            "type": "number",
+            "description": "Estimated value client generates from deliverable"
+          },
+          "scope_ambiguity_level": {
+            "type": "string",
+            "enum": [
+              "low_tight_spec",
+              "moderate_standard",
+              "high_exploratory"
+            ]
+          }
+        },
+        "required": [
+          "estimated_baseline_hours",
+          "base_hourly_rate_usd",
+          "scope_ambiguity_level"
+        ]
+      }
+    }
+  ]
+}
